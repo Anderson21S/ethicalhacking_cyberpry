@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Incidente</title>
+</head>
+<body>
+    <h1>Editar Incidente: {{ incident.title }}</h1>
+    
+    <form method="POST">
+        {% csrf_token %}
+        
+        {{ form.as_p }}
+        
+        <button type="submit">Actualizar Incidente</button>
+    </form>
+    
+    <p><a href="{% url 'incidents:detail' pk=incident.pk %}">Cancelar y volver al detalle</a></p>
+</body>
+</html>

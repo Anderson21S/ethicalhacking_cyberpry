@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Incidentes Cibernéticos</title>
+</head>
+<body>
+    <h1>Lista de Incidentes Cibernéticos</h1>
+
+    <div style="margin-bottom: 20px;">
+        <strong>Filtrar por severidad:</strong>
+        <a href="{% url 'incidents:home' %}">Todos</a> |
+        <a href="?severity=Low">Baja (Low)</a> |
+        <a href="?severity=Medium">Media (Medium)</a> |
+        <a href="?severity=High">Alta (High)</a> |
+        <a href="?severity=Critical">Crítica (Critical)</a>
+    </div>
+    
+    <p><a href="{% url 'incidents:create' %}">+ Reportar Nuevo Incidente</a></p>
+
+    {% if incidents %}
+        <table border="1" cellpadding="8">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Severidad</th>
+                    <th>Fecha de Reporte</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for incident in incidents %}
+                <tr>
+                    <td>{{ incident.title }}</td>
+                    <td>{{ incident.severity }}</td>
+                    <td>{{ incident.reported_at|date:"Y-m-d H:i" }}</td>
+                    <td>{% if incident.resolved %}Resuelto{% else %}Abierto{% endif %}</td>
+                    <td>
+                        <a href="{% url 'incidents:detail' pk=incident.pk %}">Ver Detalles</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div style="background-color: #f0f0f0; padding: 15px; border-radius: 5px;">
+            <p><strong>No hay incidentes registrados en este momento.</strong> ¡Los sistemas están seguros!</p>
+        </div>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle del Incidente</title>
+</head>
+<body>
+    <h1>{{ incident.title }}</h1>
+    
+    <ul>
+        <li><strong>Severidad:</strong> {{ incident.severity }}</li>
+        <li><strong>Estado:</strong> {% if incident.resolved %}Resuelto{% else %}Abierto{% endif %}</li>
+        <li><strong>Fecha de Reporte:</strong> {{ incident.reported_at|date:"Y-m-d H:i" }}</li>
+        <li><strong>Última Actualización:</strong> {{ incident.updated_at|date:"Y-m-d H:i" }}</li>
+    </ul>
+    
+    <h3>Descripción del incidente:</h3>
+    <p>{{ incident.description }}</p>
+
+    <hr>
+    
+    <p>
+        <a href="{% url 'incidents:update' pk=incident.pk %}">Editar</a> | 
+        <a href="{% url 'incidents:delete' pk=incident.pk %}">Eliminar</a>
+    </p>
+    
+    <p><a href="{% url 'incidents:home' %}">Volver a la lista</a></p>
+</body>
+</html>

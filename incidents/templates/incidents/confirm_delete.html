@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmar Eliminación</title>
+</head>
+<body>
+    <h1>¿Estás completamente seguro?</h1>
+    
+    <p>Estás a punto de eliminar el siguiente incidente de forma permanente:</p>
+    <h2>{{ incident.title }}</h2>
+    
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" style="color: red;">Sí, Eliminar Permanentemente</button>
+    </form>
+    
+    <p><a href="{% url 'incidents:detail' pk=incident.pk %}">Cancelar y volver</a></p>
+</body>
+</html>
