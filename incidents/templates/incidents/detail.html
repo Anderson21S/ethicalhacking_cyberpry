@@ -19,10 +19,12 @@
 
     <hr>
     
-    <p>
-        <a href="{% url 'incidents:update' pk=incident.pk %}">Editar</a> | 
-        <a href="{% url 'incidents:delete' pk=incident.pk %}">Eliminar</a>
-    </p>
+    {% if request.user.userprofile.is_admin %}
+        <p>
+            <a href="{% url 'incidents:update' pk=incident.pk %}">Editar</a> | 
+            <a href="{% url 'incidents:delete' pk=incident.pk %}">Eliminar</a>
+        </p>
+    {% endif %}
     
     <p><a href="{% url 'incidents:home' %}">Volver a la lista</a></p>
 </body>

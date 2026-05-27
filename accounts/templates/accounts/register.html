@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><title>Register | CyberLab</title></head>
+<body>
+    <h1>Crear Cuenta</h1>
+    
+    <form method='POST'>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type='submit'>Register</button>
+    </form>
+    
+    <p>¿Ya tienes una cuenta? <a href='{% url "accounts:login" %}'>Inicia sesión</a></p>
+</body>
+</html>

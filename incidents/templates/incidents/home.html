@@ -5,6 +5,17 @@
     <title>Incidentes Cibernéticos</title>
 </head>
 <body>
+
+    <nav style="background-color: #eee; padding: 10px; margin-bottom: 20px;">
+        <span>Logueado como: <strong>{{ request.user.username }}</strong></span> | 
+        <a href='{% url "accounts:dashboard" %}'>Mi Dashboard</a> | 
+        
+        <form method='POST' action="{% url 'accounts:logout' %}" style='display:inline;'>
+            {% csrf_token %}
+            <button type='submit'>Logout</button>
+        </form>
+    </nav>
+    
     <h1>Lista de Incidentes Cibernéticos</h1>
 
     <div style="margin-bottom: 20px;">

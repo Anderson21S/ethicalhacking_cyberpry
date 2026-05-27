@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><title>Mi Dashboard | CyberLab</title></head>
+<body>
+    <h1>Mi Dashboard</h1>
+    <p><strong>Usuario:</strong> {{ profile.user.username }}</p>
+    <p><strong>Rol:</strong> {{ profile.get_role_display }}</p>
+    <p><strong>Miembro desde:</strong> {{ profile.joined_at|date:"Y-m-d" }}</p>
+    
+    <h2>Mis Incidentes Reportados</h2>
+    <ul>
+        {% for incident in incidents %}
+            <li>
+                <a href="{% url 'incidents:detail' pk=incident.pk %}">{{ incident.title }}</a> 
+                - Estado: {% if incident.resolved %}Resuelto{% else %}Abierto{% endif %}
+            </li>
+        {% empty %}
+            <li>No has reportado ningún incidente.</li>
+        {% endfor %}
+    </ul>
+    
+    <p><a href="{% url 'incidents:home' %}">Ir a la lista principal de incidentes</a></p>
+</body>
+</html>
